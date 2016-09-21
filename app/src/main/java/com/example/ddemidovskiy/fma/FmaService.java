@@ -10,6 +10,7 @@ import retrofit2.http.Query;
 
 
 
+
 public interface FmaService {
 
     // https://freemusicarchive.org/api/get/{dataset}.{format}?api_key={yourkey}
@@ -17,10 +18,9 @@ public interface FmaService {
 
     @GET("/api/get/artists.json")
     Call<Artists> artists(
-        //@Query("dataset") String dataset,   // что запрашиваем
-        //@Query("format") String format,     // json/xml
-        @Query("key") String api_key        // ключ
+        @Query("key") String api_key
     );
 
 
 }
+

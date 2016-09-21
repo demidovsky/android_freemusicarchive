@@ -10,7 +10,6 @@ import android.util.Log;
  */
 
 
-/*  */
 
 public class ArtistsDBHelper extends SQLiteOpenHelper {
 
