@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteStatement;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.GridView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -19,6 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity  {
 
     private Load load = new Load();
+    private Grid grid = new Grid();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,8 @@ public class MainActivity extends AppCompatActivity  {
 
         load.init(this);
         load.loadMore();
+
+        grid.init((GridView) findViewById(R.id.gridview));
     }
 
 
