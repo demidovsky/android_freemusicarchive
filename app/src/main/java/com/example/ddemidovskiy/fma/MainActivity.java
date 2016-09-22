@@ -4,12 +4,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.GridView;
 
-import com.example.ddemidovskiy.fma.artists.ArtistAdapter;
+import com.example.ddemidovskiy.fma.artists.ArtistsLoad;
 
 public class MainActivity extends AppCompatActivity  {
 
-    private Retrofitter r = new Retrofitter();
-    private Grid grid = new Grid();
+    private ArtistsLoad r = new ArtistsLoad();
+    private Grid albumsGrid = new Grid();
+    private Grid artistsGrid = new Grid();
 
 
     @Override
@@ -20,12 +21,11 @@ public class MainActivity extends AppCompatActivity  {
         r.init(this);
         r.startOver();
 
-        grid.init((GridView) findViewById(R.id.gridview));
+        artistsGrid.init((GridView) findViewById(R.id.artists_grid));
+        albumsGrid.init((GridView) findViewById(R.id.albums_grid));
 
-
-
-        grid.getGridView().setAdapter(r.getAdapter());
-
+        artistsGrid.getGridView().setAdapter(r.getArtistAdapter());
+        albumsGrid.getGridView().setAdapter(r.getAlbumAdapter());
 
     }
 

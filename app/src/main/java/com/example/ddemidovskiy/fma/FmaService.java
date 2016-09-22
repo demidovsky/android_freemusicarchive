@@ -1,5 +1,6 @@
 package com.example.ddemidovskiy.fma;
 
+import com.example.ddemidovskiy.fma.albums.Albums;
 import com.example.ddemidovskiy.fma.artists.Artists;
 
 import retrofit2.Call;
@@ -23,6 +24,15 @@ public interface FmaService {
         @Query("key") String api_key,
         @Query("limit") int limit
     );
+
+
+
+    @GET("/api/get/albums.json")
+    Call<Albums> albums(
+            @Query("key") String api_key,
+            @Query("limit") int limit
+    );
+
 
 
 }
