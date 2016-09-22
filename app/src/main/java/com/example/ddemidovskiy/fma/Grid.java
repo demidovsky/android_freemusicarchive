@@ -16,23 +16,28 @@ public class Grid
 {
     private final int SCROLL_THRESHOLD = 40;
 
-    private ArtistAdapter adapter;
-    private GridView grid;
+
+    private GridView gridView;
+
+
+
+    public GridView getGridView()
+    {
+        return gridView;
+    }
+
 
     // Настройка сетки: привязка адаптера, обработчик кликов, бесконечный скролл
-    public void init(GridView grid)
+    public void init(GridView gridView)
     {
-        this.grid = grid;
-
-        adapter = new ArtistAdapter(
-                grid.getContext(),
-                null,
-                0);
-
-        grid.setAdapter(adapter);
+        this.gridView = gridView;
 
 
-        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+
+
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 /*Intent intent = new Intent(MainActivity.this, Detail.class);
@@ -48,12 +53,12 @@ public class Grid
         });
 
 
-        grid.setOnScrollListener(new AbsListView.OnScrollListener() {
+        gridView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
                 /*if (scrollState == SCROLL_STATE_IDLE)
                 {
-                    if (grid.getLastVisiblePosition() >= grid.getCount() - SCROLL_THRESHOLD && !loading)
+                    if (gridView.getLastVisiblePosition() >= grid.getCount() - SCROLL_THRESHOLD && !loading)
                     {
                         //Toast.makeText(getApplicationContext(), "Загрузка...", Toast.LENGTH_SHORT).show();
                         loadMore(currentPage + 1, tag);

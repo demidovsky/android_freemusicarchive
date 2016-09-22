@@ -1,5 +1,5 @@
 
-package com.example.ddemidovskiy.fma;
+package com.example.ddemidovskiy.fma.artists;
 
 import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;

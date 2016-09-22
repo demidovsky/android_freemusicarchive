@@ -1,23 +1,26 @@
 package com.example.ddemidovskiy.fma;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.util.Log;
-import android.widget.Toast;
+
+import com.example.ddemidovskiy.fma.artists.ArtistAdapter;
+import com.example.ddemidovskiy.fma.artists.Artists;
+import com.example.ddemidovskiy.fma.artists.ArtistsDBHelper;
+import com.example.ddemidovskiy.fma.artists.ArtistsTable;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.GET;
-import retrofit2.http.Query;
 
 /**
  * Created by ddemidovskiy on 21.09.2016.
  */
-public class Load implements Callback<Artists>
+public class Retrofitter implements Callback<Artists>
 {
 
     private static final String API_URL = "https://freemusicarchive.org";
@@ -26,7 +29,14 @@ public class Load implements Callback<Artists>
     private Retrofit retrofit;
     private FmaService service;
     private ArtistsDBHelper helper;
+    private ArtistAdapter adapter;
 
+
+
+    public ArtistAdapter getAdapter()
+    {
+        return adapter;
+    }
 
 
     /* начальная настройка */
@@ -43,6 +53,10 @@ public class Load implements Callback<Artists>
 
         // хэлпер - для получения базы на чтение или запись
         helper = new ArtistsDBHelper(context);
+
+        // адаптер - для связи данных с представлением
+        adapter = new ArtistAdapter(context, null, 0);
+
     }
 
 
@@ -101,6 +115,9 @@ public class Load implements Callback<Artists>
 
         db.setTransactionSuccessful();
         db.endTransaction();
+
+        Cursor cursor = getCursor();
+        updateCursor(cursor);
     }
 
 
@@ -110,9 +127,34 @@ public class Load implements Callback<Artists>
     /* ошибка */
     @Override
     public void onFailure(Call<Artists> call, Throwable t) {
+        Log.d("dimmy", "http failure");
         //Toast.makeText(context), "Проблемы с загрузкой", Toast.LENGTH_SHORT).show();
+
     }
 
+
+
+
+    /* получение данных */
+    private Cursor getCursor() {
+        return helper.getReadableDatabase().query(
+                ArtistsTable.TABLE_NAME,    // таблица
+                null,                       // колонки
+                null,                       // WHERE
+                null,                       // параметры WHERE
+                null,                       // GROUP BY
+                null,                       // HAVING
+                null                        // ORDER BY
+        );
+    }
+
+
+
+
+    /* обновление данных */
+    private void updateCursor(Cursor cursor) {
+        adapter.swapCursor(cursor);
+    }
 
 
 }

@@ -4,6 +4,8 @@ package com.example.ddemidovskiy.fma;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Generated;
+
+import com.example.ddemidovskiy.fma.artists.ArtistImage;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

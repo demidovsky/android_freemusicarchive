@@ -1,4 +1,4 @@
-package com.example.ddemidovskiy.fma;
+package com.example.ddemidovskiy.fma.artists;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -14,7 +14,7 @@ import android.util.Log;
 public class ArtistsDBHelper extends SQLiteOpenHelper {
 
     private static final String DB_FILE = "artists.db";
-    private static final  int DB_VERSION = 1;
+    private static final  int DB_VERSION = 2;
 
     public ArtistsDBHelper(Context context) //, String name, SQLiteDatabase.CursorFactory factory, int version)
     {

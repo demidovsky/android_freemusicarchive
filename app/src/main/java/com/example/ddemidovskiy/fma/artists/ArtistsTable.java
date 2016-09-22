@@ -1,4 +1,4 @@
-package com.example.ddemidovskiy.fma;
+package com.example.ddemidovskiy.fma.artists;
 
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -17,7 +17,7 @@ import android.widget.Toast;
 public final class ArtistsTable {
     public static final String TABLE_NAME = "artists";
 
-    public static final String COLUMN_ID = "artist_id";
+    public static final String COLUMN_ID = "_id";
     public static final String COLUMN_IMAGE = "artist_image_file";
 
     public static final String SQL_CREATE = String.format(

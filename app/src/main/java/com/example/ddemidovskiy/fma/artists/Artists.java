@@ -1,9 +1,11 @@
 
-package com.example.ddemidovskiy.fma;
+package com.example.ddemidovskiy.fma.artists;
 
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Generated;
+
+import com.example.ddemidovskiy.fma.Dataset;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

@@ -1,13 +1,16 @@
-package com.example.ddemidovskiy.fma;
+package com.example.ddemidovskiy.fma.artists;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.ImageView;
 
+import com.example.ddemidovskiy.fma.Holder;
+import com.example.ddemidovskiy.fma.R;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -20,11 +23,11 @@ public class ArtistAdapter extends CursorAdapter {
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-
+        Log.d("happy", "newView");
         View view = LayoutInflater.from(context).inflate(R.layout.grid_item, parent, false);
         Holder holder = new Holder();
         holder.picture = (ImageView) view.findViewById(R.id.image);
-        populateView(holder, cursor, context);
+        //populateView(holder, cursor, context);
         view.setTag(holder);
 
         return view;
@@ -32,6 +35,7 @@ public class ArtistAdapter extends CursorAdapter {
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
+        Log.d("happy", "bindView");
         Holder holder = (Holder) view.getTag();
         populateView(holder, cursor, context);
     }
