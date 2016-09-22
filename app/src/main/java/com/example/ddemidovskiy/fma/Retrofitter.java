@@ -65,9 +65,9 @@ public class Retrofitter implements Callback<Artists>
 
 
     /* запрос */
-    public void loadMore() //int page, String search) {
+    private void loadMore() //int page, String search) {
     {
-        Call <Artists> call = service.artists(API_KEY);
+        Call <Artists> call = service.artists(API_KEY, 10);
 
         //loading = true;
 
@@ -76,6 +76,14 @@ public class Retrofitter implements Callback<Artists>
     }
 
 
+
+
+
+    public void startOver() {
+        helper.getWritableDatabase().delete(ArtistsTable.TABLE_NAME, null, null);
+        //currentPage = 1;
+        loadMore();//currentPage, tag);
+    }
 
 
 

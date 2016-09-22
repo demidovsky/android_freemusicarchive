@@ -20,7 +20,8 @@ public interface FmaService {
 
     @GET("/api/get/artists.json")
     Call<Artists> artists(
-        @Query("key") String api_key
+        @Query("key") String api_key,
+        @Query("limit") int limit
     );
 
 

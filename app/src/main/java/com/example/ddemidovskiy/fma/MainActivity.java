@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_main);
 
         r.init(this);
-        r.loadMore();
+        r.startOver();
 
         grid.init((GridView) findViewById(R.id.gridview));
 
