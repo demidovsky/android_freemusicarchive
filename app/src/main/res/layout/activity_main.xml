@@ -1,35 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:text="Исполнители"/>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-<GridView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/artists_grid"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-          android:numColumns="3"
-    tools:context="com.example.ddemidovskiy.fma.MainActivity">
-</GridView>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.view.PagerTitleStrip
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top" />
+
+    </android.support.v4.view.ViewPager>
 
 
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:text="Альбомы"/>
 
-
-<GridView xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          android:id="@+id/albums_grid"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:numColumns="3"
-          tools:context="com.example.ddemidovskiy.fma.MainActivity">
-</GridView>
+</LinearLayout>

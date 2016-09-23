@@ -1,5 +1,5 @@
 
-package com.example.ddemidovskiy.fma;
+package com.example.ddemidovskiy.fma.artists;
 
 import java.util.ArrayList;
 import java.util.List;

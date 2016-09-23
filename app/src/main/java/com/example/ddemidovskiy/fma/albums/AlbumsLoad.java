@@ -1,4 +1,4 @@
-package com.example.ddemidovskiy.fma.artists;
+package com.example.ddemidovskiy.fma.albums;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -10,7 +10,7 @@ import com.example.ddemidovskiy.fma.DBHelper;
 import com.example.ddemidovskiy.fma.Load;
 import com.example.ddemidovskiy.fma.MainActivity;
 import com.example.ddemidovskiy.fma.FmaService;
-import com.example.ddemidovskiy.fma.artists.Dataset;
+import com.example.ddemidovskiy.fma.albums.Dataset;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -21,7 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * Created by ddemidovskiy on 21.09.2016.
  */
-public class ArtistsLoad implements Callback<Artists>, Load
+public class AlbumsLoad implements Callback<Albums>, Load
 {
 
     private static final String API_URL = "https://freemusicarchive.org";
@@ -30,19 +30,19 @@ public class ArtistsLoad implements Callback<Artists>, Load
     private Retrofit retrofit;
     private FmaService service;
     //private DBHelper helper;
-    private ArtistAdapter adapter;
+    private AlbumAdapter adapter;
 
 
 
     @Override
-    public ArtistAdapter getAdapter() { return adapter; }
+    public AlbumAdapter getAdapter() { return adapter; }
 
 
     /* начальная настройка */
     @Override
     public void init(Context context)
     {
-        Log.d("dimmy", "ArtistsLoad: init start.");
+        Log.d("dimmy", "AlbumsLoad: init start.");
 
         // настройки http-клиента
         retrofit = new Retrofit.Builder()
@@ -52,13 +52,13 @@ public class ArtistsLoad implements Callback<Artists>, Load
 
         // сервис - для непосредственно запросов к API
         service = retrofit.create(FmaService.class);
-        Log.d("dimmy", "ArtistsLoad: retrofit created.");
+        Log.d("dimmy", "AlbumsLoad: retrofit created.");
 
         // хэлпер - для получения базы на чтение или запись
         //helper = new DBHelper(context);
 
         // адаптер - для связи данных с представлением
-        adapter = new ArtistAdapter(context, null, 0);
+        adapter = new AlbumAdapter(context, null, 0);
         Log.d("dimmy", "AlbumsLoad: adapter created.");
 
     }
@@ -72,10 +72,10 @@ public class ArtistsLoad implements Callback<Artists>, Load
     @Override
     public void loadMore() //int page, String search) {
     {
-        Call <Artists> call = service.artists(API_KEY, 10);
+        Call <Albums> call = service.albums(API_KEY, 10);
         //loading = true;
         call.enqueue(this);
-        Log.d("dimmy", "ArtistsLoad: Request sent.");
+        Log.d("dimmy", "AlbumsLoad: Request sent.");
     }
 
 
@@ -84,23 +84,23 @@ public class ArtistsLoad implements Callback<Artists>, Load
 
     @Override
     public void startOver() {
-        MainActivity.helper.getWritableDatabase().delete(ArtistsTable.TABLE_NAME, null, null);
+        MainActivity.helper.getWritableDatabase().delete(AlbumsTable.TABLE_NAME, null, null);
         //currentPage = 1;
         loadMore();//currentPage, tag);
-
     }
+
 
 
 
     /* ответ */
     @Override
-    public void onResponse(Call<Artists> call, Response<Artists> response) {
+    public void onResponse(Call<Albums> call, Response<Albums> response) {
 
-        Log.d("dimmy", "ArtistsLoad: onResponse");
+        Log.d("dimmy", "AlbumsLoad: onResponse");
 
 
         // Разбор ответа
-        Artists body;
+        Albums body;
         try
         {
             body = response.body();
@@ -115,13 +115,13 @@ public class ArtistsLoad implements Callback<Artists>, Load
 
         // Запись в базу
         SQLiteDatabase db = MainActivity.helper.getWritableDatabase();
-        SQLiteStatement statement = db.compileStatement(ArtistsTable.SQL_INSERT);
+        SQLiteStatement statement = db.compileStatement(AlbumsTable.SQL_INSERT);
         db.beginTransaction();
 
-        for (Dataset artist: body.getDataset())
+        for (Dataset album: body.getDataset())
         {
-            String url = artist.getArtistImageFile();
-            Log.d("dimmy", "artist image: " + url);
+            String url = album.getAlbumImageFile();
+            Log.d("dimmy", "album image: " + url);
             statement.bindString(1, url);
             statement.execute();
         }
@@ -139,7 +139,7 @@ public class ArtistsLoad implements Callback<Artists>, Load
 
     /* ошибка */
     @Override
-    public void onFailure(Call<Artists> call, Throwable t) {
+    public void onFailure(Call<Albums> call, Throwable t) {
         Log.d("dimmy", "http failure");
         //Toast.makeText(context), "Проблемы с загрузкой", Toast.LENGTH_SHORT).show();
 
@@ -151,7 +151,7 @@ public class ArtistsLoad implements Callback<Artists>, Load
     /* получение данных */
     private Cursor getCursor() {
         return MainActivity.helper.getReadableDatabase().query(
-                ArtistsTable.TABLE_NAME,    // таблица
+                AlbumsTable.TABLE_NAME,    // таблица
                 null,                       // колонки
                 null,                       // WHERE
                 null,                       // параметры WHERE
@@ -166,6 +166,7 @@ public class ArtistsLoad implements Callback<Artists>, Load
     private void updateCursor(Cursor cursor) {
         adapter.swapCursor(cursor);
     }
+
 
 
 

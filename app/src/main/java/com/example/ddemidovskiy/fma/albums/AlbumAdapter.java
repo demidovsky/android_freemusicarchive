@@ -44,7 +44,7 @@ public class AlbumAdapter extends CursorAdapter {
     private void populateView(Holder holder, Cursor cursor, Context context) {
         Picasso
                 .with(context)
-                .load(cursor.getString(cursor.getColumnIndex(A.COLUMN_IMAGE)))
+                .load(cursor.getString(cursor.getColumnIndex(AlbumsTable.COLUMN_IMAGE)))
                 .fit()
                 .centerCrop()
                 .into(holder.picture);
