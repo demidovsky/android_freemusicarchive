@@ -26,6 +26,7 @@ public class ArtistsLoad implements Callback<Artists>, Load
 
     private static final String API_URL = "https://freemusicarchive.org";
     private static final String API_KEY = "SM8RACT0OT76MKD4";
+    private static final int API_LIMIT = 20;
 
     private Retrofit retrofit;
     private FmaService service;
@@ -72,7 +73,7 @@ public class ArtistsLoad implements Callback<Artists>, Load
     @Override
     public void loadMore() //int page, String search) {
     {
-        Call <Artists> call = service.artists(API_KEY, 10);
+        Call <Artists> call = service.artists(API_KEY, API_LIMIT);
         //loading = true;
         call.enqueue(this);
         Log.d("dimmy", "ArtistsLoad: Request sent.");
